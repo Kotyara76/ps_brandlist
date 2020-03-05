@@ -214,16 +214,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
                         'name' => 'BRAND_DISPLAY_BRAND_LIST',
                         'required' => true,
                         'options' => array(
-                            'query' => array(
-                                array(
-                                    'id' => '1',
-                                    'name' => 'Brand 1',
-                                ),
-                                array(
-                                    'id' => '2',
-                                    'name' => 'Brand 2',
-                                ),
-                            ),
+                            'query' => $this->getManufacturersAdminSelector(),
                             'id' => 'id',
                             'name' => 'name',
                         ),
@@ -267,6 +258,20 @@ class Ps_Brandlist extends Module implements WidgetInterface
         return $helper->generateForm(array($fields_form));
     }
 
+    public function getManufacturersAdminSelector()
+    {
+        $brands = Manufacturer::getLiteManufacturersList();
+
+        $arBrands = [];
+        foreach ($brands as $brand) {
+            $arBrands[] = [
+                'id' => $brand['id_manufacturer'],
+                'name' => $brand['name'],
+            ];
+        }
+        return $arBrands;
+    }
+
     public function getConfigFieldsValues()
     {
         return array(
@@ -277,6 +282,10 @@ class Ps_Brandlist extends Module implements WidgetInterface
             'BRAND_DISPLAY_TEXT_NB' => Tools::getValue(
                 'BRAND_DISPLAY_TEXT_NB',
                 Configuration::get('BRAND_DISPLAY_TEXT_NB')
+            ),
+            'BRAND_DISPLAY_BRAND_LIST' => Tools::getValue(
+                'BRAND_DISPLAY_BRAND_LIST',
+                explode(',', Configuration::get('BRAND_DISPLAY_BRAND_LIST'))
             ),
         );
     }
