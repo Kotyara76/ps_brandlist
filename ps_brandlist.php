@@ -64,6 +64,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
     {
         Configuration::updateValue('BRAND_DISPLAY_TYPE', 'brand_text');
         Configuration::updateValue('BRAND_DISPLAY_TEXT_NB', 5);
+        Configuration::updateValue('BRAND_DISPLAY_BRAND_LIST', '');
 
         return parent::install() &&
             $this->registerHook('displayLeftColumn') &&
@@ -285,7 +286,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
                 'BRAND_DISPLAY_TEXT_NB',
                 Configuration::get('BRAND_DISPLAY_TEXT_NB')
             ),
-            'BRAND_DISPLAY_BRAND_LIST' => Tools::getValue(
+            'BRAND_DISPLAY_BRAND_LIST[]' => Tools::getValue(
                 'BRAND_DISPLAY_BRAND_LIST',
                 explode('|', Configuration::get('BRAND_DISPLAY_BRAND_LIST'))
             ),
@@ -340,6 +341,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
             'brands' => $brands,
             'page_link' => $this->context->link->getPageLink('manufacturer'),
             'text_list_nb' => Configuration::get('BRAND_DISPLAY_TEXT_NB'),
+            'brand_display_list' => Configuration::get('BRAND_DISPLAY_BRAND_LIST'),
             'brand_display_type' => Configuration::get('BRAND_DISPLAY_TYPE'),
             'display_link_brand' => Configuration::get('PS_DISPLAY_SUPPLIERS'),
         );
