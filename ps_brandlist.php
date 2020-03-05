@@ -267,7 +267,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
         $arBrands = [];
         foreach ($brands as $brand) {
             $arBrands[] = [
-                'id' => $brand['id_manufacturer'],
+                'id' => $brand['id'],
                 'name' => $brand['name'],
             ];
         }
