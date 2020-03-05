@@ -78,7 +78,8 @@ class Ps_Brandlist extends Module implements WidgetInterface
     {
         return parent::uninstall()
             && Configuration::deleteByName('BRAND_DISPLAY_TYPE')
-            && Configuration::deleteByName('BRAND_DISPLAY_TEXT_NB');
+            && Configuration::deleteByName('BRAND_DISPLAY_TEXT_NB')
+            && Configuration::deleteByName('BRAND_DISPLAY_BRAND_LIST');
     }
 
     public function getContent()
@@ -88,8 +89,9 @@ class Ps_Brandlist extends Module implements WidgetInterface
         if (Tools::isSubmit('submitBlockBrands')) {
             $type = Tools::getValue('BRAND_DISPLAY_TYPE');
             $text_nb = (int)Tools::getValue('BRAND_DISPLAY_TEXT_NB');
+            $brand_list = implode('|', Tools::getValue('BRAND_DISPLAY_BRAND_LIST'));
 
-            if ('brand_text' === $type && !Validate::isUnsignedInt($text_nb)) {
+            if (!strlen($brand_list) && 'brand_text' === $type && !Validate::isUnsignedInt($text_nb)) {
                 $errors[] = $this->trans(
                     'There is an invalid number of elements.',
                     array(),
@@ -104,6 +106,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
             } else {
                 Configuration::updateValue('BRAND_DISPLAY_TYPE', $type);
                 Configuration::updateValue('BRAND_DISPLAY_TEXT_NB', $text_nb);
+                Configuration::updateValue('BRAND_DISPLAY_BRAND_LIST', $brand_list);
                 $this->_clearCache('*');
             }
 
