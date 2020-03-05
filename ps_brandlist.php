@@ -327,6 +327,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
             foreach ($brands as $key => $brand) {
                 if (!empty($brand_display_list) && !in_array($brand['id'], $brand_display_list)) {
                     unset($brands[$key]);
+                    continue;
                 }
                 $brands[$key]['image'] = $this->context->language->iso_code . '-default';
                 $brands[$key]['link'] = $this->context->link->getManufacturerLink($brand['id_manufacturer']);
