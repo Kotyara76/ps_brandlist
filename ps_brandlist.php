@@ -325,7 +325,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
         $brand_display_list = explode('|', Configuration::get('BRAND_DISPLAY_BRAND_LIST'));
         if (!empty($brands)) {
             foreach ($brands as $key => $brand) {
-                if (!empty($brand_display_list) && in_array($brand['id'], $brand_display_list)) {
+                if (!empty($brand_display_list) && !in_array($brand['id'], $brand_display_list)) {
                     unset($brands[$key]);
                 }
                 $brands[$key]['image'] = $this->context->language->iso_code . '-default';
