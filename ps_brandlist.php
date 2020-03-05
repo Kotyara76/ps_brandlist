@@ -287,7 +287,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
             ),
             'BRAND_DISPLAY_BRAND_LIST' => Tools::getValue(
                 'BRAND_DISPLAY_BRAND_LIST',
-                explode(',', Configuration::get('BRAND_DISPLAY_BRAND_LIST'))
+                explode('|', Configuration::get('BRAND_DISPLAY_BRAND_LIST'))
             ),
         );
     }
