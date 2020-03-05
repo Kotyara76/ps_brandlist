@@ -165,7 +165,8 @@ class Ps_Brandlist extends Module implements WidgetInterface
                             'Modules.Brandlist.Admin'
                         ),
                         'name' => 'BRAND_DISPLAY_TYPE',
-                        'required' => true,
+                        'required' => false,
+                        'multiple' => true,
                         'options' => array(
                             'query' => array(
                                 array(
