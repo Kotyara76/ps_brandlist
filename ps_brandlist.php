@@ -204,6 +204,30 @@ class Ps_Brandlist extends Module implements WidgetInterface
                         'name' => 'BRAND_DISPLAY_TEXT_NB',
                         'class' => 'fixed-width-xs'
                     ),
+                    array(
+                        'type' => 'select',
+                        'label' => $this->trans(
+                            'Brands to display',
+                            array(),
+                            'Modules.Brandlist.Admin'
+                        ),
+                        'name' => 'BRAND_DISPLAY_BRAND_LIST',
+                        'required' => true,
+                        'options' => array(
+                            'query' => array(
+                                array(
+                                    'id' => '1',
+                                    'name' => 'Brand 1',
+                                ),
+                                array(
+                                    'id' => '2',
+                                    'name' => 'Brand 2',
+                                ),
+                            ),
+                            'id' => 'id',
+                            'name' => 'name',
+                        ),
+                    ),
                 ),
                 'submit' => array(
                     'title' => $this->trans(
