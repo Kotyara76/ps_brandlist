@@ -165,8 +165,8 @@ class Ps_Brandlist extends Module implements WidgetInterface
                             'Modules.Brandlist.Admin'
                         ),
                         'name' => 'BRAND_DISPLAY_TYPE',
-                        'required' => false,
-                        'multiple' => true,
+                        'required' => true,
+                        'multiple' => false,
                         'options' => array(
                             'query' => array(
                                 array(
@@ -213,7 +213,8 @@ class Ps_Brandlist extends Module implements WidgetInterface
                             'Modules.Brandlist.Admin'
                         ),
                         'name' => 'BRAND_DISPLAY_BRAND_LIST',
-                        'required' => true,
+                        'required' => false,
+                        'multiple' => true,
                         'options' => array(
                             'query' => $this->getManufacturersAdminSelector(),
                             'id' => 'id',
