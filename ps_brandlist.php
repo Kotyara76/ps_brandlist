@@ -322,17 +322,21 @@ class Ps_Brandlist extends Module implements WidgetInterface
             $withProduct = true
         );
 
+        $brand_display_list = explode('|', Configuration::get('BRAND_DISPLAY_BRAND_LIST'));
         if (!empty($brands)) {
-            foreach ($brands as &$brand) {
-                $brand['image'] = $this->context->language->iso_code . '-default';
-                $brand['link'] = $this->context->link->getManufacturerLink($brand['id_manufacturer']);
+            foreach ($brands as $key => $brand) {
+                if (!empty($brand_display_list) && in_array($brand['id'], $brand_display_list)) {
+                    unset($brands[$key]);
+                }
+                $brands[$key]['image'] = $this->context->language->iso_code . '-default';
+                $brands[$key]['link'] = $this->context->link->getManufacturerLink($brand['id_manufacturer']);
                 $fileExist = file_exists(
                     _PS_MANU_IMG_DIR_ . $brand['id_manufacturer'] . '-' .
                     ImageType::getFormattedName('medium') . '.jpg'
                 );
 
                 if ($fileExist) {
-                    $brand['image'] = $brand['id_manufacturer'];
+                    $brands[$key]['image'] = $brand['id_manufacturer'];
                 }
             }
         }
@@ -341,7 +345,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
             'brands' => $brands,
             'page_link' => $this->context->link->getPageLink('manufacturer'),
             'text_list_nb' => Configuration::get('BRAND_DISPLAY_TEXT_NB'),
-            'brand_display_list' => Configuration::get('BRAND_DISPLAY_BRAND_LIST'),
+            'brand_display_list' => $brand_display_list,
             'brand_display_type' => Configuration::get('BRAND_DISPLAY_TYPE'),
             'display_link_brand' => Configuration::get('PS_DISPLAY_SUPPLIERS'),
         );
