@@ -98,7 +98,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
                     array(),
                     'Modules.Brandlist.Admin'
                 );
-            } elseif (!in_array($type, array('brand_text', 'brand_form'))) {
+            } elseif (!in_array($type, array('brand_text', 'brand_form', 'brand_block'))) {
                 $errors[] = $this->trans(
                     'Please activate at least one system list.',
                     array(),
@@ -182,6 +182,14 @@ class Ps_Brandlist extends Module implements WidgetInterface
                                     'id' => 'brand_form',
                                     'name' => $this->trans(
                                         'Use a drop-down list',
+                                        array(),
+                                        'Modules.Brandlist.Admin'
+                                    ),
+                                ),
+                                array(
+                                    'id' => 'brand_block',
+                                    'name' => $this->trans(
+                                        'Use a block with Logo',
                                         array(),
                                         'Modules.Brandlist.Admin'
                                     ),
@@ -325,7 +333,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
         $brand_display_list = explode('|', Configuration::get('BRAND_DISPLAY_BRAND_LIST'));
         if (!empty($brands)) {
             foreach ($brands as $key => $brand) {
-                if (!empty($brand_display_list) && !in_array($brand['id'], $brand_display_list)) {
+                if (!empty($brand_display_list) && !in_array($brand['id_manufacturer'], $brand_display_list)) {
                     unset($brands[$key]);
                     continue;
                 }
@@ -343,7 +351,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
         }
 
         return array(
-            'brands' => $brands,
+            'brands' => array_values($brands),
             'page_link' => $this->context->link->getPageLink('manufacturer'),
             'text_list_nb' => Configuration::get('BRAND_DISPLAY_TEXT_NB'),
             'brand_display_list' => $brand_display_list,
