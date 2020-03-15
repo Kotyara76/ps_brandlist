@@ -98,7 +98,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
                     array(),
                     'Modules.Brandlist.Admin'
                 );
-            } elseif (!in_array($type, array('brand_text', 'brand_form', 'brand_block'))) {
+            } elseif (!in_array($type, array('brand_text', 'brand_form', 'brand_logo'))) {
                 $errors[] = $this->trans(
                     'Please activate at least one system list.',
                     array(),
@@ -187,7 +187,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
                                     ),
                                 ),
                                 array(
-                                    'id' => 'brand_block',
+                                    'id' => 'brand_logo',
                                     'name' => $this->trans(
                                         'Use a block with Logo',
                                         array(),
@@ -337,16 +337,18 @@ class Ps_Brandlist extends Module implements WidgetInterface
                     unset($brands[$key]);
                     continue;
                 }
-                $brands[$key]['image'] = $this->context->language->iso_code . '-default';
-                $brands[$key]['link'] = $this->context->link->getManufacturerLink($brand['id_manufacturer']);
-                $fileExist = file_exists(
-                    _PS_MANU_IMG_DIR_ . $brand['id_manufacturer'] . '-' .
-                    ImageType::getFormattedName('medium') . '.jpg'
-                );
 
-                if ($fileExist) {
-                    $brands[$key]['image'] = $brand['id_manufacturer'];
-                }
+                $brands[$key]['image'] = $this->context->link->getManufacturerImageLink($brand['id_manufacturer'], 'small');
+
+                // ?q=Brand-3Peak+Incorporated
+                $categoryLink = implode('', [
+                    $this->context->link->getCategoryLink(14),
+                    '?q=',
+                    $this->trans('Brand', array(), 'Modules.Facetedsearch.Shop'),
+                    '-',
+                    urlencode(str_replace('-', '--', $brand['name']))
+                ]);
+                $brands[$key]['link'] = $categoryLink;
             }
         }
 
