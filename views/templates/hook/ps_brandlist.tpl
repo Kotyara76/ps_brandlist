@@ -23,17 +23,6 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<div>
-  <h4>
-    {if $display_link_brand}<a href="{$page_link}" title="{l s='Brands' d='Modules.Brandlist.Shop'}">{/if}
-      {l s='Brands' d='Modules.Brandlist.Shop'}
-    {if $display_link_brand}</a>{/if}
-  </h4>
-  <div>
-    {if $brands}
-      {include file="module:ps_brandlist/views/templates/_partials/$brand_display_type.tpl" brands=$brands}
-    {else}
-      <p>{l s='No brand' d='Modules.Brandlist.Shop'}</p>
-    {/if}
-  </div>
-</div>
+
+{include file="module:ps_brandlist/views/templates/_partials/$brand_display_type.tpl" brands=$brands}
+

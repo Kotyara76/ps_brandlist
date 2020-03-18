@@ -338,7 +338,7 @@ class Ps_Brandlist extends Module implements WidgetInterface
                     continue;
                 }
 
-                $brands[$key]['image'] = $this->context->link->getManufacturerImageLink($brand['id_manufacturer'], 'small');
+                $brands[$key]['image'] = $this->context->link->getManufacturerImageLink($brand['id_manufacturer'], 'medium_default');
 
                 // ?q=Brand-3Peak+Incorporated
                 $categoryLink = implode('', [
