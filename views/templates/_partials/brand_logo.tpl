@@ -1,5 +1,5 @@
 <section class="featured-products featured-brands clearfix">
-    <h2 class="h2 products-section-title text-uppercase">
+    <h2 class="title_block">
         {l s='Brands' d='Modules.Brandlist.Shop'}
     </h2>
     <div class="products">
