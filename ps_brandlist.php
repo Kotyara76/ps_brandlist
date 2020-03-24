@@ -305,6 +305,9 @@ class Ps_Brandlist extends Module implements WidgetInterface
         $hookName = null,
         array $configuration = array()
     ) {
+        if ('displayLeftColumn' === $hookName) {
+            $this->templateFile = 'module:ps_brandlist/views/templates/hook/ps_brandlist_left.tpl';
+        }
         $cacheId = $this->getCacheId('ps_brandlist');
         $isCached = $this->isCached($this->templateFile, $cacheId);
 
